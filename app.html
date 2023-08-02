@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     />
-    <title>App Name: A Coding Challenge</title>
+    <title>Mortgage Loan Calculator: A Coding Challenge</title>
 
     <!-- Bootstrap CSS -->
     <link
@@ -39,7 +39,7 @@
         <div class="container-fluid">
           <a class="navbar-brand" href="/index.html">
             <img src="/img/mainLogo1.png" height="30" alt="developer logo" />
-            &nbsp;App Name</a
+            &nbsp;Mortgage Loan Calculator</a
           >
           <button
             class="navbar-toggler"
@@ -55,7 +55,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="/index.html">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/app.html"
@@ -84,17 +84,111 @@
     </header>
 
     <!-- START: Main -->
+
     <main class="container py-3">
-      <h1>APP UI GOES HERE</h1>
-      <input
-        class="form-control"
-        id="message"
-        placeholder="Enter a message"
-        type="text"
-      />
-      <button class="btn btn-primary my-3" id="btnSubmit" type="button">
-        Display Message
-      </button>
+      <h1 class="text-center">Mortgage Loan Calculator</h1>
+      <div class="row row-cols-1 row-cols-lg-2 mt-lg-3">
+        <div class="flex--col col-xl-4">
+          <div
+            class="col col-sm-12 flex-col shadow border border-2 rounded-3 pt-3 bg-body-secondary p-3 h-100"
+          >
+            <div class="form-group row">
+              <label class="col col-form-label" for="loanAmount"
+                >Loan Amount</label
+              >
+              <div class="col-7">
+                <input
+                  class="form-control"
+                  type="number"
+                  id="loanAmount"
+                  placeholder="$0.00"
+                  value=""
+                />
+              </div>
+            </div>
+            <div class="form-group row pt-2">
+              <label class="col col-form-label" for="termMonths"
+                >Term (Months)</label
+              >
+              <div class="col-7">
+                <input
+                  class="form-control"
+                  type="number"
+                  id="termMonths"
+                  placeholder="Months"
+                  value=""
+                />
+              </div>
+            </div>
+            <div class="form-group row pt-2">
+              <label class="col col-form-label" for="interestRate"
+                >Interest Rate</label
+              >
+              <div class="col-7">
+                <input
+                  class="form-control"
+                  type="number"
+                  id="interestRate"
+                  placeholder="%"
+                  value=""
+                />
+              </div>
+            </div>
+            <button
+              class="btn btn-primary my-3 align-self-end"
+              id="btnSubmit"
+              onclick="valueEntered()"
+            >
+              Calculate
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="col col-xl-8 flex--col mt-3 mt-lg-0 border border-2 rounded-3"
+        >
+          <h2 class="text-center pt-4">Your Monthly Payments</h2>
+          <div
+            class="display-6 text-success my-3 rounded-3 border border-2 p-2 bg-body-secondary shadow text-center w-50 mx-auto"
+          >
+            <div id="results">$0.00</div>
+          </div>
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>Total Principal</td>
+                <td id="totalPrincipal">$0.00</td>
+              </tr>
+              <tr>
+                <td>Total Interest</td>
+                <td id="totalInterest">$0.00</td>
+              </tr>
+              <tr>
+                <td>Total Cost</td>
+                <td id="totalCost">$0.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-responsive mt-3 mt-lg-4">
+        <table class="table table-striped border shadow">
+          <thead class="table-dark">
+            <tr>
+              <th id="month">Month</th>
+              <th id="payment">Payment</th>
+              <th id="principal">Principal</th>
+              <th id="interest">Interest</th>
+              <th id="totalInterest">Total Interest</th>
+              <th id="balance">Balance</th>
+            </tr>
+          </thead>
+          <tbody id="mortgageTable">
+            <!-- mortgage go here -->
+          </tbody>
+        </table>
+      </div>
     </main>
     <!-- END: Main -->
 
@@ -134,7 +228,7 @@
     <script>
       document
         .getElementById("btnSubmit")
-        .addEventListener("click", displayMessage);
+        .addEventListener("click", valueEntered);
     </script>
   </body>
 </html>
