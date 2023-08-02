@@ -146,49 +146,60 @@
                     maximumFractionDigits: 2,
                   });
               
-                displayResults(amount, term, rate, monthlyRate, monthlyPayment);
+                displayResults(amount, term, monthlyRate, monthlyPayment);
               }
               
-              function displayResults(amount, term, rate, monthlyRate, monthlyPayment) {
-                
-              // Total interest
-              const totalInterest = monthlyPayment * term - amount;
+              function displayResults(amount, term, monthlyRate, monthlyPayment) {
+                // Total interest
+                const totalInterest = monthlyPayment * term - amount;
               
-              // display total interest
-              document.getElementById("totalInterest").value = totalInterest.toFixed(2);
+                // display total interest
+                document.getElementById("totalInterest").value = totalInterest.toFixed(2);
               
-              // Get the table body element
-              const tableBody = document.getElementById("mortgageTable");
+                // Get the table body element
+                const tableBody = document.getElementById("mortgageTable");
               
-              // Clear the table body
-              tableBody.innerHTML = "";
+                // Clear the table body
+                tableBody.innerHTML = "";
               
-              let balance = amount;
-              let totalInterestPaid = 0;
-              for (let month = 1; month <= term; month++) {
-              const interestPaid = balance * monthlyRate;
-              const principalPaid = monthlyPayment - interestPaid;
-              totalInterestPaid += interestPaid;
-              balance -= principalPaid;
+                let balance = amount;
+                let totalInterestPaid = 0;
+                for (let month = 1; month <= term; month++) {
+                  const interestPaid = balance * monthlyRate;
+                  const principalPaid = monthlyPayment - interestPaid;
+                  totalInterestPaid += interestPaid;
+                  balance -= principalPaid;
               
-              // Create a new row
-              const newRow = document.createElement("tr");
+                  // Create a new row
+                  const newRow = document.createElement("tr");
               
-              newRow.innerHTML = `<td>${month}</td><td>$${monthlyPayment.toLocaleString(
-              "en-US",
-              {minimumFractionDigits:2}
-              )}</td><td>$${principalPaid.toLocaleString("en-US",{
-              minimumFractionDigits:2,
-              })}</td><td>$${interestPaid.toLocaleString("en-US",{
-              minimumFractionDigits:2,
-              })}</td><td>$${totalInterestPaid.toLocaleString("en-US",{
-              minimumFractionDigits:2,
-              })}</td><td>$${balance.toLocaleString("en-US",{minimumFractionDigits:2})}</td>`;
+                  newRow.innerHTML = `<td>${month}</td><td>$${monthlyPayment.toLocaleString(
+                    "en-US",
               
-              // Append the new row to the table body
-              tableBody.appendChild(newRow);
+                    {maximumFractionDigits: 2, minimumFractionDigits: 2}
+                  )}</td><td>$${principalPaid.toLocaleString("en-US", {
+                    maximumFractionDigits: 2,
+              
+                    minimumFractionDigits: 2,
+                  })}</td><td>$${interestPaid.toLocaleString("en-US", {
+                    maximumFractionDigits: 2,
+              
+                    minimumFractionDigits: 2,
+                  })}</td><td>$${totalInterestPaid.toLocaleString("en-US", {
+                    maximumFractionDigits: 2,
+              
+                    minimumFractionDigits: 2,
+                  })}</td><td>$${balance.toLocaleString("en-US", {
+                    maximumFractionDigits: 2,
+              
+                    minimumFractionDigits: 2,
+                  })}</td>`;
+              
+                  // Append the new row to the table body
+                  tableBody.appendChild(newRow);
+                }
               }
-              }
+              
               
             </code>
           </pre>
