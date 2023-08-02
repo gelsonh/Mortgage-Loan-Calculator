@@ -81,14 +81,23 @@ function displayResults(amount, term, monthlyRate, monthlyPayment) {
 
     newRow.innerHTML = `<td>${month}</td><td>$${monthlyPayment.toLocaleString(
       "en-US",
-      {minimumFractionDigits: 2}
+
+      {maximumFractionDigits: 2, minimumFractionDigits: 2}
     )}</td><td>$${principalPaid.toLocaleString("en-US", {
+      maximumFractionDigits: 2,
+
       minimumFractionDigits: 2,
     })}</td><td>$${interestPaid.toLocaleString("en-US", {
+      maximumFractionDigits: 2,
+
       minimumFractionDigits: 2,
     })}</td><td>$${totalInterestPaid.toLocaleString("en-US", {
+      maximumFractionDigits: 2,
+
       minimumFractionDigits: 2,
     })}</td><td>$${balance.toLocaleString("en-US", {
+      maximumFractionDigits: 2,
+
       minimumFractionDigits: 2,
     })}</td>`;
 
