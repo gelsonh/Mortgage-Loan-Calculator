@@ -92,26 +92,127 @@
         <div class="col-12 col-lg-8">
           <pre class="line-numbers">
             <code class="language-js">
-              function displayMessage() {
-                let inputBox = document.getElementById("message");
+              function valueEntered() {
+                const amount = parseFloat(document.getElementById("loanAmount").value);
+                const term = parseFloat(document.getElementById("termMonths").value);
+                const rate = parseFloat(document.getElementById("interestRate").value) / 100;
               
-                let message = inputBox.value;
+                // Validate input
+                if (amount <= 0 || term <= 0 || rate <= 0) {
+                  alert("Please enter valid values.");
+                  return;
+                }
               
-                Swal.fire({
-                  backdrop: false,
-                  title: "Mortgage Loan Calculator",
-                  text: message,
-                });
+                // Call the calcLoan function with the values entered by the user
+                calcLoan(amount, term, rate);
               }
+              
+              function calcLoan(amount, term, rate) {
+                // Calculate the monthly interest rate
+                const monthlyRate = rate / 12;
+              
+                // Calculate the monthly payment
+                const monthlyPayment =
+                  (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -term));
+              
+                // Display monthly payment
+                document.getElementById("results").innerHTML =
+                  "$" + monthlyPayment.toFixed(2);
+              
+                // Total principal
+                const totalPrincipal = amount;
+                document.getElementById("totalPrincipal").innerHTML =
+                  "$" +
+                  totalPrincipal.toLocaleString("en-US", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  });
+              
+                // Total interest
+                const totalInterest = monthlyPayment * term - amount;
+                document.getElementById("totalInterest").innerHTML =
+                  "$" +
+                  totalInterest.toLocaleString("en-US", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  });
+              
+                // Total cost
+                const totalCost = amount + totalInterest;
+                document.getElementById("totalCost").innerHTML =
+                  "$" +
+                  totalCost.toLocaleString("en-US", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  });
+              
+                displayResults(amount, term, rate, monthlyRate, monthlyPayment);
+              }
+              
+              function displayResults(amount, term, rate, monthlyRate, monthlyPayment) {
+                
+              // Total interest
+              const totalInterest = monthlyPayment * term - amount;
+              
+              // display total interest
+              document.getElementById("totalInterest").value = totalInterest.toFixed(2);
+              
+              // Get the table body element
+              const tableBody = document.getElementById("mortgageTable");
+              
+              // Clear the table body
+              tableBody.innerHTML = "";
+              
+              let balance = amount;
+              let totalInterestPaid = 0;
+              for (let month = 1; month <= term; month++) {
+              const interestPaid = balance * monthlyRate;
+              const principalPaid = monthlyPayment - interestPaid;
+              totalInterestPaid += interestPaid;
+              balance -= principalPaid;
+              
+              // Create a new row
+              const newRow = document.createElement("tr");
+              
+              newRow.innerHTML = `<td>${month}</td><td>$${monthlyPayment.toLocaleString(
+              "en-US",
+              {minimumFractionDigits:2}
+              )}</td><td>$${principalPaid.toLocaleString("en-US",{
+              minimumFractionDigits:2,
+              })}</td><td>$${interestPaid.toLocaleString("en-US",{
+              minimumFractionDigits:2,
+              })}</td><td>$${totalInterestPaid.toLocaleString("en-US",{
+              minimumFractionDigits:2,
+              })}</td><td>$${balance.toLocaleString("en-US",{minimumFractionDigits:2})}</td>`;
+              
+              // Append the new row to the table body
+              tableBody.appendChild(newRow);
+              }
+              }
+              
             </code>
           </pre>
         </div>
         <div class="col-12 col-lg-4">
-          <p>The code is structured in one function</p>
-          <h5>displayMessage</h5>
+          <h5>Code Explanation</h5>
           <p>
-            Shows a SweetAlert with the value of the
-            <code>message</code>variable
+            This loan calculator requires three inputs from the user: the loan
+            amount, loan term in months, and annual interest rate. When the user
+            submits their input, the <code>valueEntered</code> function is
+            called. This function retrieves and validates the values entered,
+            ensuring they are positive numbers. The
+            <code>calcLoan</code> function is then called with these values to
+            calculate the monthly interest rate, monthly payment, total
+            principal, total interest, and total loan cost. These values are
+            then displayed on the page using <code>innerHTML</code>. Lastly, the
+            <code>displayResults</code> function calculates the monthly interest
+            rate and payment once more, then generates an amortization schedule
+            for the loan. This schedule details how each monthly payment is
+            split between principal and interest, as well as the remaining loan
+            balance after each payment. The amortization schedule is displayed
+            in a table on the page. This code is a helpful tool for users to
+            calculate their monthly loan payments and understand how their
+            payments are divided between principal and interest over time.
           </p>
         </div>
       </div>

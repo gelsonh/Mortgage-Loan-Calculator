@@ -56,7 +56,6 @@ footer {
   --bs-btn-hover-border-color: var(--gh-theme-700);
   --bs-btn-active-bg: var(--gh-theme-800);
   --bs-btn-active-border-color: var(--gh-theme-800);
-  
 }
 
 .navbar,
@@ -100,16 +99,13 @@ footer {
   align-items: center;
 }
 
-
 /* #region: Media Queries */
 @media (max-width: 992px) {
-  .flex--col {
-  /* center the div */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  
-
+  .flex-col {
+    /* center the div */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }

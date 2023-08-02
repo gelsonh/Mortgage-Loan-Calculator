@@ -9,9 +9,10 @@ function valueEntered() {
     return;
   }
 
-  // Call the formulasUsed function with the values entered by the user
+  // Call the calcLoan function with the values entered by the user
   calcLoan(amount, term, rate);
 }
+
 function calcLoan(amount, term, rate) {
   // Calculate the monthly interest rate
   const monthlyRate = rate / 12;
@@ -51,17 +52,10 @@ function calcLoan(amount, term, rate) {
       maximumFractionDigits: 2,
     });
 
-  displayResults(amount, term, rate);
+  displayResults(amount, term, monthlyRate, monthlyPayment);
 }
 
-function displayResults(amount, term, rate) {
-  // Calculate the monthly interest rate
-  const monthlyRate = rate / 12;
-
-  // Calculate the monthly payment
-  const monthlyPayment =
-    (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -term));
-
+function displayResults(amount, term, monthlyRate, monthlyPayment) {
   // Total interest
   const totalInterest = monthlyPayment * term - amount;
 
